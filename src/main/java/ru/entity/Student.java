@@ -1,7 +1,10 @@
 package ru.entity;
 
 
+import ru.demo.util.DateUtils;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "student")
@@ -21,6 +24,10 @@ public class Student {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "date_of_birth")
+    @Temporal(TemporalType.DATE)
+    private Date date;
+
     public Student() {
     }
 
@@ -28,6 +35,13 @@ public class Student {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    public Student(String firstName, String lastName, String email, Date date) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.date = date;
     }
 
     public int getId() {
@@ -62,6 +76,14 @@ public class Student {
         this.email = email;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -69,6 +91,7 @@ public class Student {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", date=" + DateUtils.formatDate(date) +
                 '}';
     }
 }

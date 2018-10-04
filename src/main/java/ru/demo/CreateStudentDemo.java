@@ -3,7 +3,11 @@ package ru.demo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import ru.demo.util.DateUtils;
 import ru.entity.Student;
+
+import java.text.ParseException;
+import java.util.Date;
 
 public class CreateStudentDemo {
 
@@ -18,9 +22,12 @@ public class CreateStudentDemo {
         // create session
         Session session = factory.getCurrentSession();
         try {
+            String strDate = "5/06/2018";
+            Date dateOfBirth = DateUtils.parse(strDate);
+
             // create a student object
             System.out.println("Creating a student object...");
-            Student tempStudent = new Student("Mark", "Twein", "mark@google.com");
+            Student tempStudent = new Student("Mark", "Twein", "mark@google.com", dateOfBirth);
 
             // start a transaction
             session.beginTransaction();
@@ -33,6 +40,8 @@ public class CreateStudentDemo {
             session.getTransaction().commit();
             System.out.println("Done!");
 
+        } catch (ParseException e) {
+            e.printStackTrace();
         } finally {
             factory.close();
         }
