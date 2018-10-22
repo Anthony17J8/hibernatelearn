@@ -38,6 +38,14 @@ public class EagerLazyDemo {
             // commit transaction
             session.getTransaction().commit();
 
+            // close the session
+            session.close();
+
+            System.out.println("\nThe session is now closed!\n");
+
+            // get course for the instructor
+            System.out.println("Lazy: Courses: " + tempInstructor.getCourses());
+
             System.out.println("Lazy: Done!");
 
         } finally {
